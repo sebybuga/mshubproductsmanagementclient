@@ -134,15 +134,13 @@ public class StoreService {
         Optional<ProductEntity> productEntity;
         if (storeEntity != null) {
             storeEntity.setStoreProductList(null);
-            storeEntity.setStoreStatusId(ProductStatusEnum.ACTIVE);
             storeProductEntity.setStore(storeEntity);
         }
         if (productId != null) {
             productEntity = productRepository.findById(productId);
             if (productEntity.isPresent()) {
                 storeProductEntity.setProduct(productEntity.get());
-                storeProductEntity.setPrice(productEntity.get().getPrice());
-                storeProductEntity.setCurrencyId(productEntity.get().getCurrencyId());
+
             }
         }
         if (quantity != null) {

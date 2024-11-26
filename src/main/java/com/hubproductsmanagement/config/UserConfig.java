@@ -14,6 +14,4 @@ public class UserConfig {
     private String userAdmin;
     private String passAdmin;
 
-    private String roleStaff;
-    private String roleAdmin;
 }

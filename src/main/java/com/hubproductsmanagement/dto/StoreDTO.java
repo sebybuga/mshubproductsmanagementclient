@@ -21,11 +21,11 @@ import java.util.List;
 public class StoreDTO {
 
     private Long id;
-
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "ro-RO", timezone = "Europe/Bucharest")
-    private LocalDateTime storeDate;
-
+    private String storeName;
+    private String zipCode;
+    private String address;
+    private String city;
+    private String country;
 
     private String createdBy;
 
@@ -34,9 +34,6 @@ public class StoreDTO {
     private String updatedBy;
 
     private LocalDateTime updatedAt;
-
-    @Enumerated(EnumType.ORDINAL)
-    private ProductStatusEnum storeStatusId;
 
     private  List<ProductStoreDTO> storeProductList;
 

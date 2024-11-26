@@ -13,8 +13,9 @@ public class ProductStoreRequestDTO {
     @NonNull
     private Long productId;
 
-    @NonNull
     private Double quantity;
+
+    private Double price;
 
 
 }

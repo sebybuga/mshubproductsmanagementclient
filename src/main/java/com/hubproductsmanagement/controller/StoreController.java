@@ -5,7 +5,12 @@ import com.github.dozermapper.core.Mapper;
 import com.hubproductsmanagement.dto.StoreDTO;
 import com.hubproductsmanagement.dto.StoreRequestDTO;
 import com.hubproductsmanagement.repo.StoreRepository;
+import com.hubproductsmanagement.service.AuthenticationService;
 import com.hubproductsmanagement.service.StoreService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -14,30 +19,44 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("hub-products-management/api/stores")
+@Slf4j
+@RequestMapping("hub-products-management/stores")
 public class StoreController {
 	private StoreService storeService;
+
+	private AuthenticationService authService;
 	private StoreRepository storeRepository;
 	private Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
-	public StoreController(StoreService storeService, StoreRepository storeRepository) {
+	public StoreController(StoreService storeService, StoreRepository storeRepository, AuthenticationService authService) {
 		this.storeService = storeService;
 		this.storeRepository=storeRepository;
+		this.authService = authService;
 	}
 
 	@PostMapping
-	public StoreDTO createStore(@RequestBody @Valid StoreRequestDTO storeDto) {
-		return storeService.createStore(storeDto);
+	public ResponseEntity<StoreDTO> createStore(@RequestBody @Valid StoreRequestDTO storeDto, @RequestHeader HttpHeaders headers) {
+		try {
+			if (!authService.authenticate(headers)) return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+
+				return new ResponseEntity<>(storeService.createStore(storeDto),HttpStatus.OK);
+
+		} catch (Exception e) {
+			log.info("An error has occurred while updating product with params: {}, error:{}  "
+					,storeDto, e);
+			return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
+		}
 	}
 	
 	@PutMapping
-	public StoreDTO updateStore(@RequestBody @Valid StoreRequestDTO storeDto) {
+	public ResponseEntity<StoreDTO> updateStore(@RequestBody @Valid StoreRequestDTO storeDto, @RequestHeader HttpHeaders headers) {
 			try {
+				if (!authService.authenticate(headers)) return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
 				if (storeDto.getId() == null) throw new Exception("Store id not provided!");
-				return storeService.updateStore(storeDto);
+				return new ResponseEntity<>(storeService.updateStore(storeDto),HttpStatus.OK);
 
 			} catch (Exception e) {
-				throw new RuntimeException(e);
+				return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
 			}
 	}
 
@@ -46,9 +65,11 @@ public class StoreController {
 		return storeService.getStore(id);
 	}
 
-	@DeleteMapping("/delete/{id}")
-	public void deleteStore(@PathVariable Long id) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity deleteStore(@PathVariable Long id, @RequestHeader HttpHeaders headers) {
+		if (!authService.authenticate(headers)) return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
 		storeService.deleteStore(id);
+		return new ResponseEntity<>("deleted", HttpStatus.OK);
 	}
 	
 	@GetMapping("/all/{ids}")

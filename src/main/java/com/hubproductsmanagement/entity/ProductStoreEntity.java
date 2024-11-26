@@ -1,11 +1,16 @@
 package com.hubproductsmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.hubproductsmanagement.constant.CurrencyEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Table(name = "product_stores")
@@ -30,6 +35,11 @@ public class ProductStoreEntity {
     private Double quantity;
 
     private Double price;
+
+
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "ro-RO", timezone = "Europe/Bucharest")
+    private LocalDateTime refDate;
 
     @Enumerated(EnumType.ORDINAL)
     private CurrencyEnum currencyId;

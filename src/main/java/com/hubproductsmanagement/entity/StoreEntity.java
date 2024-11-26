@@ -1,11 +1,10 @@
 package com.hubproductsmanagement.entity;
 
-import com.hubproductsmanagement.constant.ProductStatusEnum;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +21,20 @@ public class StoreEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime storeDate;
+    @Column(name = "storeName")
+    private String storeName;
+
+    @Column(name = "zipCode")
+    private String zipCode;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "country")
+    private String country;
 
     @Column(name = "createdBy", updatable = false)
     private String createdBy;
@@ -33,9 +45,6 @@ public class StoreEntity {
     private String updatedBy;
 
     private LocalDateTime updatedAt;
-
-    @Enumerated(EnumType.ORDINAL)
-    private ProductStatusEnum storeStatusId;
 
     @OneToMany(
             orphanRemoval = true,
@@ -51,26 +60,24 @@ public class StoreEntity {
         if (this == o) return true;
         if (!(o instanceof StoreEntity)) return false;
         StoreEntity that = (StoreEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(storeDate, that.storeDate) && Objects.equals(createdBy, that.createdBy)
+        return Objects.equals(id, that.id) && Objects.equals(createdBy, that.createdBy)
                 && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedBy, that.updatedBy) && Objects.equals(updatedAt, that.updatedAt)
-                && storeStatusId == that.storeStatusId && Objects.equals(storeProductList, that.storeProductList);
+                && Objects.equals(storeProductList, that.storeProductList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, storeDate, createdBy, createdAt, updatedBy, updatedAt, storeStatusId, storeProductList);
+        return Objects.hash(id, createdBy, createdAt, updatedBy, updatedAt, storeProductList);
     }
 
     @Override
     public String toString() {
         return "StoreEntity{" +
                 "id=" + id +
-                ", storeDate=" + storeDate +
                 ", createdBy='" + createdBy + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedBy='" + updatedBy + '\'' +
                 ", updatedAt=" + updatedAt +
-                ", storeStatusId=" + storeStatusId +
                 '}';
     }
 }

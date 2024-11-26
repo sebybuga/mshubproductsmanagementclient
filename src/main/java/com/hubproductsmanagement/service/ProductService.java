@@ -6,6 +6,9 @@ import com.hubproductsmanagement.dto.ProductDTO;
 import com.hubproductsmanagement.entity.ProductEntity;
 import com.hubproductsmanagement.repo.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -27,14 +30,14 @@ public class ProductService {
 
     }
 
-    public ProductDTO createProduct(ProductDTO productDTO) {
-
-        return saveProductInDatabase(productDTO);
+    public ResponseEntity<ProductDTO> createProduct(ProductDTO productDTO, HttpHeaders headers) {
+        ProductDTO response = saveProductInDatabase(productDTO, headers);
+        return new ResponseEntity<>(response,HttpStatus.OK);
 
     }
 
     @Transactional
-    private ProductDTO saveProductInDatabase(ProductDTO productDTO) {
+    private ProductDTO saveProductInDatabase(ProductDTO productDTO, HttpHeaders headers) {
         log.info("productEntity to be saved is :{}", productDTO);
 
         ProductEntity productEntity = null;
@@ -65,6 +68,7 @@ public class ProductService {
     }
 
 
+
     public ProductDTO getProduct(Long id) {
         ProductDTO productDTO = null;
         Optional<ProductEntity> productEntity = productRepository.findById(id);
@@ -78,13 +82,14 @@ public class ProductService {
     }
 
 
-    public ProductDTO updateProduct(ProductDTO productDto) {
-
-        return saveProductInDatabase(productDto);
+    public ResponseEntity<ProductDTO> updateProduct(ProductDTO productDto, HttpHeaders headers) {
+        ProductDTO response = saveProductInDatabase(productDto, headers);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    public void deleteProduct(Long id) {
+    public  ResponseEntity<String> deleteProduct(Long id, HttpHeaders headers) {
         productRepository.deleteById(id);
+        return new ResponseEntity<>("Deleted",HttpStatus.OK);
 
     }
 

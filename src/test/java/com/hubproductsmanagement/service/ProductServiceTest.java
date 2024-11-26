@@ -2,7 +2,6 @@ package com.hubproductsmanagement.service;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
-import com.hubproductsmanagement.constant.CurrencyEnum;
 import com.hubproductsmanagement.dto.ProductDTO;
 import com.hubproductsmanagement.entity.ProductEntity;
 import com.hubproductsmanagement.repo.ProductRepository;
@@ -11,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
@@ -38,16 +39,14 @@ public class ProductServiceTest {
 
         ProductDTO productDTO = generateProductDto();
         ProductEntity productEntity = mapper.map(productDTO, ProductEntity.class);
+        HttpHeaders headers = new HttpHeaders();
         when(productRepositoryMock.save(any())).thenReturn(productEntity);
         when(productRepositoryMock.findById(any())).thenReturn(Optional.ofNullable(productEntity));
 
+        ResponseEntity<ProductDTO> savedProduct = productService.createProduct(productDTO, headers);
 
-        ProductDTO savedProduct = productService.createProduct(productDTO);
-
-        assertEquals(productDTO.getName(), savedProduct.getName());
-        assertEquals(productDTO.getCurrencyId(), savedProduct.getCurrencyId());
-        assertEquals(productDTO.getPrice(), savedProduct.getPrice());
-
+        assertEquals(savedProduct.getBody().getName(),productDTO.getName());
+        assertEquals(savedProduct.getBody().getSupplier(),productDTO.getSupplier());
 
     }
 
@@ -58,8 +57,6 @@ public class ProductServiceTest {
         productDTO.setName("some name");
         productDTO.setDescription("some desc");
         productDTO.setSupplier("some supplier");
-        productDTO.setCurrencyId(CurrencyEnum.USD);
-        productDTO.setPrice(40.0);
 
         return productDTO;
 
