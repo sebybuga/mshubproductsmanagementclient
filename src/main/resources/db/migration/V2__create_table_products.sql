@@ -5,6 +5,10 @@ CREATE TABLE IF NOT EXISTS `products` (
   `name` varchar(250) CHARACTER SET utf32 COLLATE utf32_bin NOT NULL,
   `supplier` varchar(250) CHARACTER SET utf32 COLLATE utf32_bin NOT NULL,
   `description` LONGTEXT CHARACTER SET utf32 COLLATE utf32_bin,
+  `createdBy` varchar(50) CHARACTER SET utf32 COLLATE utf32_bin DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedBy` varchar(50) CHARACTER SET utf32 COLLATE utf32_bin DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf32 COLLATE=utf32_bin;

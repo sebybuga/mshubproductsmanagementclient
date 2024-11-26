@@ -1,12 +1,8 @@
 package com.hubproductsmanagement.dto;
 
-import com.hubproductsmanagement.constant.CurrencyEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 
 
 @Data
@@ -22,10 +18,4 @@ public class ProductDTO {
 
 	private String description;
 
-	@Enumerated(EnumType.ORDINAL)
-	private CurrencyEnum currencyId;
-
-	private Double price;
-
-	
 }

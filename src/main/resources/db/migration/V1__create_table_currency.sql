@@ -1,3 +1,9 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               8.3.0 - MySQL Community Server - GPL
+-- Server OS:                    Win64
+-- --------------------------------------------------------
+
 USE `hubproductsmanagement`;
 
 CREATE TABLE IF NOT EXISTS `currency` (
@@ -8,5 +14,5 @@ CREATE TABLE IF NOT EXISTS `currency` (
 
 
 INSERT INTO `currency` (`id`, `currency`) VALUES
-	(0, '$'),
+	(0, 'USD'),
 	(1, 'EUR');
