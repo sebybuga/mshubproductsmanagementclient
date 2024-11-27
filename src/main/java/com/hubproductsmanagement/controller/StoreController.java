@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -35,6 +36,7 @@ public class StoreController {
 	}
 
 	@PostMapping
+	@PreAuthorize("hasAnyRole('ADMINISTRATOR')")
 	public ResponseEntity<StoreDTO> createStore(@RequestBody @Valid StoreRequestDTO storeDto, @RequestHeader HttpHeaders headers) {
 		try {
 			if (!authService.authenticate(headers)) return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
@@ -42,13 +44,14 @@ public class StoreController {
 				return new ResponseEntity<>(storeService.createStore(storeDto),HttpStatus.OK);
 
 		} catch (Exception e) {
-			log.info("An error has occurred while updating product with params: {}, error:{}  "
+			log.error("An error has occurred while updating product with params: {}, error:{}  "
 					,storeDto, e);
 			return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
 		}
 	}
 	
 	@PutMapping
+	@PreAuthorize("hasAnyRole('ADMINISTRATOR')")
 	public ResponseEntity<StoreDTO> updateStore(@RequestBody @Valid StoreRequestDTO storeDto, @RequestHeader HttpHeaders headers) {
 			try {
 				if (!authService.authenticate(headers)) return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
@@ -56,6 +59,8 @@ public class StoreController {
 				return new ResponseEntity<>(storeService.updateStore(storeDto),HttpStatus.OK);
 
 			} catch (Exception e) {
+				log.error("An error has occurred while updating store with params: {}, error:{}  "
+						,storeDto, e);
 				return new ResponseEntity<>(null, HttpStatus.SERVICE_UNAVAILABLE);
 			}
 	}
@@ -66,10 +71,11 @@ public class StoreController {
 	}
 
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAnyRole('ADMINISTRATOR')")
 	public ResponseEntity deleteStore(@PathVariable Long id, @RequestHeader HttpHeaders headers) {
 		if (!authService.authenticate(headers)) return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
 		storeService.deleteStore(id);
-		return new ResponseEntity<>("deleted", HttpStatus.OK);
+		return new ResponseEntity<>(id +" deleted", HttpStatus.OK);
 	}
 	
 	@GetMapping("/all/{ids}")

@@ -28,29 +28,18 @@ public class SecurityConfiguration  {
     }
 
 
-   /* @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        // InMemoryUserDetailsManager setup simplified with only 2 users
-        UserDetails admin = User.withUsername(userConfig.getUserAdmin())
-                .password(encoder.encode(userConfig.getPassAdmin()))
-                .roles(RoleEnum.ADMINISTRATOR.name(), RoleEnum.STAFF.name())
-                .build();
-
-        UserDetails user = User.withUsername(userConfig.getPassStaff())
-                .password(encoder.encode(userConfig.getPassStaff()))
-                .roles(RoleEnum.STAFF.name())
-                .build();
-
-        return new InMemoryUserDetailsManager(admin, user);
-    }*/
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth, PasswordEncoder passwordEncoder) throws Exception {
         auth.inMemoryAuthentication()
                 .passwordEncoder(PasswordEncoderConfig.passwordEncoder())
                 .withUser(userConfig.getUserAdmin())
                 .password(PasswordEncoderConfig.passwordEncoder().encode(userConfig.getPassAdmin()))
-                .roles(RoleEnum.ADMINISTRATOR.name());
+                .roles(RoleEnum.ADMINISTRATOR.name()) .and()
+
+                .withUser(userConfig.getUserStaff())
+                .password(PasswordEncoderConfig.passwordEncoder().encode(userConfig.getPassStaff()))
+                .roles(RoleEnum.STAFF.name());
+
     }
 
     @Bean
@@ -60,8 +49,6 @@ public class SecurityConfiguration  {
         http.authorizeHttpRequests(requests-> {
             try {
                 requests
-                        .requestMatchers("/public/**")
-                        .permitAll()
                         .anyRequest()
                         .authenticated()
                         .and()
