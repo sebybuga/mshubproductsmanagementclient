@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS `product_stores` (
   `quantity` double NOT NULL,
   `price` double NOT NULL DEFAULT '0',
   `currencyId` int NOT NULL DEFAULT '0',
-  `refDate` DATE,
   `createdBy` varchar(50) CHARACTER SET utf32 COLLATE utf32_bin DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedBy` varchar(50) CHARACTER SET utf32 COLLATE utf32_bin DEFAULT NULL,
