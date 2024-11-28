@@ -1,0 +1,637 @@
+{
+	"info": {
+		"_postman_id": "00b5005a-1adb-4186-8284-fdfa7dc52c1c",
+		"name": "Hub Products Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9730507"
+	},
+	"item": [
+		{
+			"name": "GET Store ONE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "1234Cinci",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "ion.brad",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/stores/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"stores",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Product ONE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "5678Noua!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "dan.ionescu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/products/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Store MANY",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "5678Noua!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "dan.ionescu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/stores/all/1,2,3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"stores",
+						"all",
+						"1,2,3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Product MANY",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "dan.ionescu",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "5678Noua!",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/products/all/1,2,3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"products",
+						"all",
+						"1,2,3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Store ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "dan.ionescu",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "5678Noua!",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{       \r\n    \"createdBy\": \"test10\",\r\n    \"createdAt\": \"05/05/2024 11:00:00\", \r\n    \"storeName\" : \"Mega Image\",\r\n    \"zipCode\": \"030167\",\r\n    \"address\": \"Soseaua Iancului nr 4\",\r\n    \"city\" : \"Bucuresti\",\r\n    \"country\":\"Romania\",       \r\n    \"storeProductList\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 7.0,\r\n            \"price\": 4.0,\r\n            \"currency\": \"USD\"\r\n            \r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 8.0,\r\n            \"price\": 4.0,  \r\n            \"currency\": \"EUR\"\r\n            \r\n        }\r\n    ]\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/stores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Product ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "5678Noua!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "dan.ionescu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"productName\": \"Faina din grau 000\",\r\n    \"supplier\": \"Gusturi romanesti\",\r\n    \"description\": \"1kg. Faina den GRAU alba (gluten). Produs obtinut prin macinarea graului.\",\r\n    \"status\": \"ACTIVE\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Store ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "dan.ionescu",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "5678Noua!",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{       \r\n    \"id\":30,\r\n    \"updatedBy\": \"test10\",\r\n    \"updatedAt\": \"05/05/2024 11:00:00\", \r\n    \"storeName\" : \"Mega Image\",\r\n    \"zipCode\": \"030167\",\r\n    \"address\": \"Soseaua Iancului nr 34\",\r\n    \"city\" : \"Bucuresti\",\r\n    \"country\":\"Romania\",       \r\n    \"storeProductList\": [\r\n        {\r\n           \r\n            \"productId\": 3,\r\n            \"quantity\": 7.0,\r\n            \"currency\": \"EUR\",\r\n            \"price\": 5.0\r\n            \r\n            \r\n        },\r\n        {\r\n            \r\n            \"productId\": 6,\r\n            \"quantity\": 8.0,\r\n            \"currency\": \"USD\",\r\n            \"price\": 6.0  \r\n            \r\n            \r\n        }\r\n    ]\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/stores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE product ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "5678Noua!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "dan.ionescu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":18,\r\n    \"orderDate\": \"05/05/2024 12:00:00\",\r\n    \"createdBy\": \"test9\",\r\n    \"createdAt\": \"05/05/2024 11:00:00\",        \r\n    \"orderProductList\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 20.0\r\n            \r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 21.0\r\n            \r\n        }\r\n    ]\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/products/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"products",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE store ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "5678Noua!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "dan.ionescu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/stores/36",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"stores",
+						"36"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Product ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "5678Noua!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "dan.ionescu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \r\n    \"id\": 7,\r\n    \"productName\": \"Faina din grau 000\",\r\n    \"supplier\": \"Gusturi romanesti\",\r\n    \"description\": \"1kg. Faina den grau alba (gluten). Produs obtinut prin macinarea graului.\",\r\n    \"status\": \"INACTIVE\",\r\n    \"updatedBy\": \"test12\",\r\n    \"updatedAt\": \"05/05/2024 11:00:00\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "password",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "anxynms",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
