@@ -269,7 +269,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{       \r\n    \"createdBy\": \"test10\",\r\n    \"createdAt\": \"05/05/2024 11:00:00\", \r\n    \"storeName\" : \"Mega Image\",\r\n    \"zipCode\": \"030167\",\r\n    \"address\": \"Soseaua Iancului nr 4\",\r\n    \"city\" : \"Bucuresti\",\r\n    \"country\":\"Romania\",       \r\n    \"storeProductList\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 7.0,\r\n            \"price\": 4.0,\r\n            \"currency\": \"USD\"\r\n            \r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 8.0,\r\n            \"price\": 4.0,  \r\n            \"currency\": \"EUR\"\r\n            \r\n        }\r\n    ]\r\n    \r\n}"
+					"raw": "{       \r\n    \"createdBy\": \"test10\",\r\n    \"createdAt\": \"05/05/2024 11:00:00\", \r\n    \"storeName\" : \"Mega Image\",\r\n    \"zipCode\": \"030167\",\r\n    \"address\": \"Soseaua Iancului nr 4\",\r\n    \"city\" : \"Bucuresti\",\r\n    \"country\":\"Romania\",       \r\n    \"storeProductList\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 7.0,\r\n            \"price\": 4.0,\r\n            \"currency\": \"USD\",\r\n            \"createdBy\": \"test10\",\r\n            \"createdAt\": \"05/05/2024 11:00:00\"\r\n            \r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 8.0,\r\n            \"price\": 4.0,  \r\n            \"currency\": \"EUR\",\r\n            \"createdBy\": \"test10\",\r\n            \"createdAt\": \"05/05/2024 11:00:00\"\r\n            \r\n        }\r\n    ]\r\n    \r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8082/hub-products-management/stores",
@@ -331,7 +331,69 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \r\n    \"productName\": \"Faina din grau 000\",\r\n    \"supplier\": \"Gusturi romanesti\",\r\n    \"description\": \"1kg. Faina den GRAU alba (gluten). Produs obtinut prin macinarea graului.\",\r\n    \"status\": \"ACTIVE\"\r\n    \r\n}"
+					"raw": "{ \r\n    \"productName\": \"Faina din grau 000\",\r\n    \"supplier\": \"Gusturi romanesti\",\r\n    \"description\": \"1kg. Faina den GRAU alba (gluten). Produs obtinut prin macinarea graului.\",\r\n    \"status\": \"ACTIVE\",\r\n\r\n    \"createdBy\": \"test10\",\r\n    \"createdAt\": \"05/05/2024 11:00:00\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8082/hub-products-management/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"hub-products-management",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Product ONE",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"followRedirects": false,
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "5678Noua!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "dan.ionescu",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Encoding",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \r\n    \"id\": 5,\r\n    \"productName\": \"Faina din grau 000\",\r\n    \"supplier\": \"Gusturi romanesti\",\r\n    \"description\": \"1kg. Faina den grau alba (gluten). Produs obtinut prin macinarea graului.\",\r\n    \"status\": \"INACTIVE\",\r\n    \"updatedBy\": \"test12\",\r\n    \"updatedAt\": \"05/05/2024 11:00:00\"\r\n    \r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8082/hub-products-management/products",
@@ -393,7 +455,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{       \r\n    \"id\":30,\r\n    \"updatedBy\": \"test10\",\r\n    \"updatedAt\": \"05/05/2024 11:00:00\", \r\n    \"storeName\" : \"Mega Image\",\r\n    \"zipCode\": \"030167\",\r\n    \"address\": \"Soseaua Iancului nr 34\",\r\n    \"city\" : \"Bucuresti\",\r\n    \"country\":\"Romania\",       \r\n    \"storeProductList\": [\r\n        {\r\n           \r\n            \"productId\": 3,\r\n            \"quantity\": 7.0,\r\n            \"currency\": \"EUR\",\r\n            \"price\": 5.0\r\n            \r\n            \r\n        },\r\n        {\r\n            \r\n            \"productId\": 6,\r\n            \"quantity\": 8.0,\r\n            \"currency\": \"USD\",\r\n            \"price\": 6.0  \r\n            \r\n            \r\n        }\r\n    ]\r\n    \r\n}"
+					"raw": "{       \r\n    \"id\":5,\r\n    \"updatedBy\": \"test10\",\r\n    \"updatedAt\": \"05/05/2024 11:00:00\", \r\n    \"storeName\" : \"Mega Image\",\r\n    \"zipCode\": \"030167\",\r\n    \"address\": \"Soseaua Iancului nr 34\",\r\n    \"city\" : \"Bucuresti\",\r\n    \"country\":\"Romania\",       \r\n    \"storeProductList\": [\r\n        {\r\n           \r\n            \"productId\": 3,\r\n            \"quantity\": 7.0,\r\n            \"currency\": \"EUR\",\r\n            \"price\": 5.0,\r\n            \r\n            \"updatedBy\": \"test10\",\r\n            \"updatedAt\": \"05/05/2024 11:00:00\" \r\n                        \r\n        },\r\n        {\r\n            \r\n            \"productId\": 4,\r\n            \"quantity\": 8.0,\r\n            \"currency\": \"USD\",\r\n            \"price\": 6.0,\r\n\r\n            \"updatedBy\": \"test10\",\r\n            \"updatedAt\": \"05/05/2024 11:00:00\"   \r\n                        \r\n        }\r\n    ]\r\n    \r\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8082/hub-products-management/stores",
@@ -455,10 +517,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":18,\r\n    \"orderDate\": \"05/05/2024 12:00:00\",\r\n    \"createdBy\": \"test9\",\r\n    \"createdAt\": \"05/05/2024 11:00:00\",        \r\n    \"orderProductList\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 20.0\r\n            \r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 21.0\r\n            \r\n        }\r\n    ]\r\n    \r\n}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8082/hub-products-management/products/7",
+					"raw": "http://localhost:8082/hub-products-management/products/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -467,7 +529,7 @@
 					"path": [
 						"hub-products-management",
 						"products",
-						"7"
+						"5"
 					]
 				}
 			},
@@ -521,7 +583,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8082/hub-products-management/stores/36",
+					"raw": "http://localhost:8082/hub-products-management/stores/5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -530,69 +592,7 @@
 					"path": [
 						"hub-products-management",
 						"stores",
-						"36"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UPDATE Product ONE",
-			"protocolProfileBehavior": {
-				"strictSSL": false,
-				"followRedirects": false,
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "5678Noua!",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "dan.ionescu",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20iLCJjdXN0b206Um9sZXMiOiJPcGVyYXRvcixPd25lcixBZG1pbmlzdHJhdG9yLEVuZ2luZWVyIiwiY3VzdG9tOlRjQWNjZXB0ZWQiOmZhbHNlLCJleHAiOjE2NDQ1MTkwNTEsImlhdCI6MTY0NDUxODc1MSwiZW1haWwiOiJqYWluLmFzaGlzaC5leHRAc2llbWVucy5jb20ifQ.GdPIQ6UNrP0axR57hpxHLWISc0ICLgwWvhIFyDbC7MLZAOclkm04ONPCYH07NcdHRFejjIz9Ajtt9Ei2SLqU7A",
-						"type": "text",
-						"disabled": true
-					},
-					{
-						"key": "Accept-Encoding",
-						"value": "",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{ \r\n    \r\n    \"id\": 7,\r\n    \"productName\": \"Faina din grau 000\",\r\n    \"supplier\": \"Gusturi romanesti\",\r\n    \"description\": \"1kg. Faina den grau alba (gluten). Produs obtinut prin macinarea graului.\",\r\n    \"status\": \"INACTIVE\",\r\n    \"updatedBy\": \"test12\",\r\n    \"updatedAt\": \"05/05/2024 11:00:00\"\r\n    \r\n}"
-				},
-				"url": {
-					"raw": "http://localhost:8082/hub-products-management/products",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8082",
-					"path": [
-						"hub-products-management",
-						"products"
+						"5"
 					]
 				}
 			},
