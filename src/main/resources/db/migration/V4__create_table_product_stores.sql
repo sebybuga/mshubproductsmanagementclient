@@ -18,11 +18,11 @@ CREATE TABLE IF NOT EXISTS `product_stores` (
   CONSTRAINT `FK_PRODUCT_STORES_CURRENCY_ID` FOREIGN KEY (`currencyId`) REFERENCES `currency` (`id`),
   CONSTRAINT `FK_PRODUCT_STORES_STORE_ID` FOREIGN KEY (`storeId`) REFERENCES `stores` (`id`),
   CONSTRAINT `FK_PRODUCT_STORES_PRODUCT_ID` FOREIGN KEY (`productId`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
 
 
-INSERT INTO `product_stores` (`id`, `storeId`, `productId`, `quantity`, `price`, `currencyId`) VALUES
-	(1, 1, 1, 2, 1, 0),
-	(2, 1, 2, 3, 1, 0),
-	(3, 2, 3, 7, 1, 0),
-	(4, 2, 4, 8, 1, 0);
+INSERT INTO `product_stores` (`id`, `storeId`, `productId`, `quantity`, `price`, `currencyId`, `createdBy`,`createdAt`) VALUES
+	(1, 1, 1, 2, 1, 0, 'admin', now()),
+	(2, 1, 2, 3, 1, 0, 'admin', now()),
+	(3, 2, 3, 7, 1, 0, 'admin', now()),
+	(4, 2, 4, 8, 1, 0, 'admin', now());

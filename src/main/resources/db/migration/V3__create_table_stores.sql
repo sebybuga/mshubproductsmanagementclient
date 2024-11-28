@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `stores` (
   `updatedBy` varchar(50) CHARACTER SET utf32 COLLATE utf32_bin DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf32 COLLATE=utf32_bin;
 
 
 INSERT INTO `stores` (`id`, `storeName`, `zipCode`, `address`, `city`,`country`, `createdBy`, `createdAt`) VALUES
