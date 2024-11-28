@@ -9,7 +9,7 @@ import lombok.NonNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductStoreRequestDTO {
+public final class ProductStoreRequestDTO extends BaseSealedEntityDTO {
 
     @NonNull
     private Long productId;
