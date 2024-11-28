@@ -16,23 +16,25 @@ import org.springframework.web.context.request.WebRequest;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ProblemProcessingDataException.class)
-    public ResponseEntity<> handleUserNotFoundException(ProblemProcessingDataException ex, WebRequest request) {
+    public ResponseEntity<ErrorDetails> handleUserNotFoundException(ProblemProcessingDataException ex, WebRequest request) {
         return new ResponseEntity<>(new ErrorDetails(ErrorCode.ERROR, ex.getMessage()), HttpStatus.SERVICE_UNAVAILABLE);
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<> handleUnauthorized(BadCredentialsException ex, WebRequest request) {
+    public ResponseEntity<ErrorDetails> handleUnauthorized(BadCredentialsException ex, WebRequest request) {
         return new ResponseEntity<>(new ErrorDetails(ErrorCode.CONFIGURATION, ex.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<> handleAccessDenied(AccessDeniedException ex, WebRequest request) {
+    public ResponseEntity<ErrorDetails> handleAccessDenied(AccessDeniedException ex, WebRequest request) {
         return new ResponseEntity<>(new ErrorDetails(ErrorCode.CONFIGURATION, ex.getMessage()), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<> handleGlobalException(Exception ex, WebRequest request) {
-        return new ResponseEntity<>(new ErrorDetails(ErrorCode.ERROR, ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ErrorDetails> handleGlobalException(Exception ex, WebRequest request) {
+        return new ResponseEntity<>(
+                new ErrorDetails(ErrorCode.ERROR, ex.getMessage()),
+                HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
