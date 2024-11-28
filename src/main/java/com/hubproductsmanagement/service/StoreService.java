@@ -2,6 +2,7 @@ package com.hubproductsmanagement.service;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
+import com.github.dozermapper.core.MappingException;
 import com.hubproductsmanagement.dto.*;
 import com.hubproductsmanagement.entity.ProductStoreEntity;
 import com.hubproductsmanagement.entity.StoreEntity;
@@ -63,23 +64,36 @@ public class StoreService {
 
             savedStoreDTO = mapper.map(savedStore, StoreDTO.class);
 
+            log.info("productEntity saved is :{}", savedStoreDTO);
+
+            return savedStoreDTO;
+
         } catch (Exception e) {
             throw new ProblemProcessingDataException("An error has occurred while saving store data!",e);
         }
 
-        return savedStoreDTO;
+
     }
 
 
-    public StoreDTO getStore(Long id) {
+    public StoreDTO getStore(Long id)  {
+
         StoreDTO storeDTO = null;
-        Optional<StoreEntity> storeEntity = storeRepository.findById(id);
 
-        if (storeEntity.isPresent()) {
-            storeDTO = mapper.map(storeEntity.get(), StoreDTO.class);
+        try {
+            Optional<StoreEntity> storeEntity = storeRepository.findById(id);
+
+            if (storeEntity.isPresent()) {
+                storeDTO = mapper.map(storeEntity.get(), StoreDTO.class);
+            }
+
+            return storeDTO;
+
+        }catch (MappingException e){
+            throw new MappingException(e);
+        }catch (RuntimeException se) {
+            throw new ProblemProcessingDataException("Error while getting store data from DB!",se);
         }
-
-        return storeDTO;
 
     }
 
@@ -110,11 +124,11 @@ public class StoreService {
     }
 
     @Transactional
-    public StoreDeleteResponseDTO deleteStore(Long id) {
+    public DeleteResponseREC deleteStore(Long id) {
         if (!storeRepository.existsById(id)) throw new ProblemProcessingDataException("Operation impossible!", null);
         storeRepository.deleteById(id);
         log.info("Store deleted: {} ", id);
-        return new StoreDeleteResponseDTO("Store with id " + id+ " successfully deleted!");
+        return new DeleteResponseREC("Store with id " + id+ " successfully deleted!");
 
     }
 
