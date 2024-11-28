@@ -10,8 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
@@ -39,14 +37,14 @@ public class ProductServiceTest {
 
         ProductDTO productDTO = generateProductDto();
         ProductEntity productEntity = mapper.map(productDTO, ProductEntity.class);
-        HttpHeaders headers = new HttpHeaders();
+
         when(productRepositoryMock.save(any())).thenReturn(productEntity);
         when(productRepositoryMock.findById(any())).thenReturn(Optional.ofNullable(productEntity));
 
-        ResponseEntity<ProductDTO> savedProduct = productService.createProduct(productDTO, headers);
+        ProductDTO savedProduct = productService.createProduct(productDTO);
 
-        assertEquals(savedProduct.getBody().getName(),productDTO.getName());
-        assertEquals(savedProduct.getBody().getSupplier(),productDTO.getSupplier());
+        assertEquals(savedProduct.getProductName(),productDTO.getProductName());
+        assertEquals(savedProduct.getSupplier(),productDTO.getSupplier());
 
     }
 
@@ -54,7 +52,7 @@ public class ProductServiceTest {
 
         ProductDTO productDTO = new ProductDTO();
         productDTO.setId(1L);
-        productDTO.setName("some name");
+        productDTO.setProductName("some name");
         productDTO.setDescription("some desc");
         productDTO.setSupplier("some supplier");
 

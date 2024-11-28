@@ -3,15 +3,14 @@ package com.hubproductsmanagement.service;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 import com.hubproductsmanagement.dto.ProductDTO;
+import com.hubproductsmanagement.dto.ProductDeleteResponseDTO;
 import com.hubproductsmanagement.entity.ProductEntity;
+import com.hubproductsmanagement.exception.ProblemProcessingDataException;
 import com.hubproductsmanagement.repo.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -30,26 +29,24 @@ public class ProductService {
 
     }
 
-    public ResponseEntity<ProductDTO> createProduct(ProductDTO productDTO, HttpHeaders headers) {
-        ProductDTO response = saveProductInDatabase(productDTO, headers);
-        return new ResponseEntity<>(response,HttpStatus.OK);
-
+    public ProductDTO createProduct(ProductDTO productDTO) {
+        return saveProductInDatabase(productDTO, false);
     }
 
     @Transactional
-    private ProductDTO saveProductInDatabase(ProductDTO productDTO, HttpHeaders headers) {
+    private ProductDTO saveProductInDatabase(ProductDTO productDTO, boolean isUpdate) {
         log.info("productEntity to be saved is :{}", productDTO);
 
         ProductEntity productEntity = null;
         ProductDTO savedProductDTO = null;
 
         try {
-
+            if (isUpdate && productDTO.getId() == null) throw new ProblemProcessingDataException("Product id not provided!",null);
             Long productId = productDTO.getId();
             if (productId != null) {
                 Optional<ProductEntity> productEntityOptional = productRepository.findById(productId);
                 if (productEntityOptional.isEmpty()) {
-                    throw new Exception("Product id not found!");
+                    throw new ProblemProcessingDataException("Product id not found!",null);
                 }
 
             }
@@ -60,13 +57,14 @@ public class ProductService {
 
             savedProductDTO = mapper.map(savedProduct, ProductDTO.class);
 
+            log.info("productEntity saved is :{}", savedProductDTO);
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ProblemProcessingDataException("An error has occurred while saving product data!",e);
         }
 
         return savedProductDTO;
     }
-
 
 
     public ProductDTO getProduct(Long id) {
@@ -82,15 +80,15 @@ public class ProductService {
     }
 
 
-    public ResponseEntity<ProductDTO> updateProduct(ProductDTO productDto, HttpHeaders headers) {
-        ProductDTO response = saveProductInDatabase(productDto, headers);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ProductDTO updateProduct(ProductDTO productDto) {
+        return saveProductInDatabase(productDto, true);
     }
 
-    public  ResponseEntity<String> deleteProduct(Long id, HttpHeaders headers) {
+    public ProductDeleteResponseDTO deleteProduct(Long id) {
+        if (!productRepository.existsById(id)) throw new ProblemProcessingDataException("Operation impossible!",null);
         productRepository.deleteById(id);
-        return new ResponseEntity<>("Deleted",HttpStatus.OK);
-
+        log.info("Product deleted: {} ", id);
+        return new ProductDeleteResponseDTO("Product with id: " + id+ " successfully deleted!");
     }
 
 }

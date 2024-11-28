@@ -15,7 +15,7 @@ public class ProductStoreDTO  {
     private ProductDTO product;
     private Double quantity;
     private Double price;
-    private CurrencyEnum currencyId;
+    private CurrencyEnum currency;
 
 
 }

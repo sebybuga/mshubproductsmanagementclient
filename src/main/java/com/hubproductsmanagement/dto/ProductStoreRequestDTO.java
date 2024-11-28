@@ -1,5 +1,6 @@
 package com.hubproductsmanagement.dto;
 
+import com.hubproductsmanagement.constant.CurrencyEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,18 @@ public class ProductStoreRequestDTO {
     @NonNull
     private Long productId;
 
+    private Long storeId;
+
+    @NonNull
     private Double quantity;
 
+    @NonNull
     private Double price;
+    @NonNull
+    private CurrencyEnum currency;
+
+    ProductDTO product;
+    StoreDTO store;
 
 
 }

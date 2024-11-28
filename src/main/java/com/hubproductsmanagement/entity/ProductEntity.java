@@ -1,5 +1,6 @@
 package com.hubproductsmanagement.entity;
 
+import com.hubproductsmanagement.constant.ProductStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,15 +21,17 @@ public class ProductEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
  
-    private String name;
+    private String productName;
 
     private String supplier;
 
     private String description;
+    @Enumerated(EnumType.ORDINAL)
+    private ProductStatusEnum status;
 
 
-    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "product")
-    private List<ProductStoreEntity> storeProductList;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    private transient List<ProductStoreEntity> storeProductList;
 
 
     @Override
@@ -36,19 +39,19 @@ public class ProductEntity implements Serializable {
         if (this == o) return true;
         if (!(o instanceof ProductEntity)) return false;
         ProductEntity that = (ProductEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(supplier, that.supplier) && Objects.equals(description, that.description)  && Objects.equals(storeProductList, that.storeProductList);
+        return Objects.equals(id, that.id) && Objects.equals(productName, that.productName) && Objects.equals(supplier, that.supplier) && Objects.equals(description, that.description)  && Objects.equals(storeProductList, that.storeProductList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, supplier, description, storeProductList);
+        return Objects.hash(id, productName, supplier, description, storeProductList);
     }
 
     @Override
     public String toString() {
         return "ProductEntity{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", productName='" + productName + '\'' +
                 ", supplier='" + supplier + '\'' +
                 ", description='" + description + '\'' +
                 '}';

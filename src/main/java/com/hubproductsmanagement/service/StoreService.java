@@ -2,21 +2,15 @@ package com.hubproductsmanagement.service;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
-import com.hubproductsmanagement.constant.ProductStatusEnum;
-import com.hubproductsmanagement.dto.StoreDTO;
-import com.hubproductsmanagement.dto.ProductStoreRequestDTO;
-import com.hubproductsmanagement.dto.StoreRequestDTO;
-import com.hubproductsmanagement.entity.StoreEntity;
+import com.hubproductsmanagement.dto.*;
 import com.hubproductsmanagement.entity.ProductStoreEntity;
-import com.hubproductsmanagement.entity.ProductEntity;
-import com.hubproductsmanagement.repo.ProductStoreRepository;
+import com.hubproductsmanagement.entity.StoreEntity;
+import com.hubproductsmanagement.exception.ProblemProcessingDataException;
 import com.hubproductsmanagement.repo.StoreRepository;
-import com.hubproductsmanagement.repo.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,53 +21,50 @@ public class StoreService {
     private final Mapper mapper = DozerBeanMapperBuilder.buildDefault();
 
     private StoreRepository storeRepository;
-    private ProductRepository productRepository;
-    private ProductStoreRepository storeProductRepository;
 
-    public StoreService(StoreRepository storeRepository, ProductRepository productRepository, ProductStoreRepository storeProductRepository) {
+
+    public StoreService(StoreRepository storeRepository) {
         this.storeRepository = storeRepository;
-        this.productRepository = productRepository;
-        this.storeProductRepository = storeProductRepository;
     }
 
     public StoreDTO createStore(StoreRequestDTO storeDTO) {
 
-        return saveStoreInDatabase(storeDTO);
+        return saveStoreInDatabase(storeDTO, false);
 
     }
 
     @Transactional
-    private StoreDTO saveStoreInDatabase(StoreRequestDTO storeDTO) {
-        log.info("storeEntity to be saved is :{}", storeDTO);
+    private StoreDTO saveStoreInDatabase(StoreRequestDTO storeRequestDTO, boolean isUpdate) {
+        log.info("storeEntity to be saved is :{}", storeRequestDTO);
 
-        StoreEntity storeEntity = null;
+        StoreEntity storeToBeSavedEntity = null;
         StoreDTO savedStoreDTO = null;
 
         try {
+            if (isUpdate) {
+                if (storeRequestDTO.getId() == null) throw new ProblemProcessingDataException("Store id not provided!",null);
 
-            Long storeId = storeDTO.getId();
-            if (storeId != null) {
+                Long storeId = storeRequestDTO.getId();
+
                 Optional<StoreEntity> storeEntityOptional = storeRepository.findById(storeId);
                 if (storeEntityOptional.isEmpty()) {
-                    throw new Exception("Store id not found!");
+                    throw new ProblemProcessingDataException("Store not found!",null);
                 }
-
             }
+            storeToBeSavedEntity = mapper.map(storeRequestDTO, StoreEntity.class);
 
-            storeEntity = mapper.map(storeDTO, StoreEntity.class);
-
-            List<ProductStoreRequestDTO> storeProductRequestDTOList = storeDTO.getStoreProductList();
+            List<ProductStoreRequestDTO> storeProductRequestDTOList = storeRequestDTO.getStoreProductList();
 
             if (storeProductRequestDTOList != null && !storeProductRequestDTOList.isEmpty()) {
-                setProductStoreList(storeEntity, storeProductRequestDTOList);
+                setProductStoreList(storeToBeSavedEntity, storeProductRequestDTOList);
             }
 
-            StoreEntity savedStore = storeRepository.save(storeEntity);
+            StoreEntity savedStore = storeRepository.save(storeToBeSavedEntity);
 
             savedStoreDTO = mapper.map(savedStore, StoreDTO.class);
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ProblemProcessingDataException("An error has occurred while saving store data!",e);
         }
 
         return savedStoreDTO;
@@ -94,59 +85,36 @@ public class StoreService {
 
 
     public StoreDTO updateStore(StoreRequestDTO storeDto) {
-
-        return saveStoreInDatabase(storeDto);
+        return saveStoreInDatabase(storeDto, true);
     }
 
-    public void deleteStore(Long id) {
+
+    private void setProductStoreList(StoreEntity storeToBeSavedEntity, List<ProductStoreRequestDTO> storeProductRequestDTOList) {
+        List<ProductStoreEntity> storeProductEntityList;
+        storeToBeSavedEntity.getStoreProductList().clear();
+
+        storeProductEntityList = storeProductRequestDTOList.stream()
+                .map(storeProductRequest -> {
+                    ProductDTO productDTO = new ProductDTO();
+                    productDTO.setId(storeProductRequest.getProductId());
+                    storeProductRequest.setProduct(productDTO);
+
+                    ProductStoreEntity productStoreEntity = mapper.map(storeProductRequest, ProductStoreEntity.class);
+                    productStoreEntity.setStore(storeToBeSavedEntity);
+                    return productStoreEntity;
+                })
+                .toList();
+
+        storeToBeSavedEntity.setStoreProductList(storeProductEntityList);
+
+    }
+
+    @Transactional
+    public StoreDeleteResponseDTO deleteStore(Long id) {
+        if (!storeRepository.existsById(id)) throw new ProblemProcessingDataException("Operation impossible!", null);
         storeRepository.deleteById(id);
-
-    }
-
-
-    private void setProductStoreList(StoreEntity storeEntity, List<ProductStoreRequestDTO> storeProductRequestDTOList) {
-        List<ProductStoreEntity> storeProductEntityList = new ArrayList<>();
-
-        storeEntity.getStoreProductList().clear();
-
-        Long storeId = storeEntity.getId();
-        if (storeId!=null) {
-            storeProductRepository.deleteByStoreId(storeId);
-        }
-
-        for (ProductStoreRequestDTO storeProductRequestDTO : storeProductRequestDTOList) {
-            ProductStoreEntity storeProductEntity = new ProductStoreEntity();
-            buildProductStoreEntity(
-                    storeEntity,
-                    storeProductEntity,
-                    storeProductRequestDTO.getProductId(),
-                    storeProductRequestDTO.getQuantity()
-
-            );
-            storeProductEntityList.add(storeProductEntity);
-
-        }
-        storeEntity.setStoreProductList(storeProductEntityList);
-
-    }
-
-    private void buildProductStoreEntity(StoreEntity storeEntity, ProductStoreEntity storeProductEntity, Long productId, Double quantity) {
-        Optional<ProductEntity> productEntity;
-        if (storeEntity != null) {
-            storeEntity.setStoreProductList(null);
-            storeProductEntity.setStore(storeEntity);
-        }
-        if (productId != null) {
-            productEntity = productRepository.findById(productId);
-            if (productEntity.isPresent()) {
-                storeProductEntity.setProduct(productEntity.get());
-
-            }
-        }
-        if (quantity != null) {
-            storeProductEntity.setQuantity(quantity);
-        }
-
+        log.info("Store deleted: {} ", id);
+        return new StoreDeleteResponseDTO("Store with id " + id+ " successfully deleted!");
 
     }
 

@@ -4,14 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import jakarta.persistence.Column;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,14 +22,20 @@ public class StoreRequestDTO {
 
     private Long id;
 
+
+    @NotBlank
     private String storeName;
 
+    @NotEmpty
     private String zipCode;
 
+    @NotEmpty
     private String address;
 
+    @NotEmpty
     private String city;
 
+    @NotEmpty
     private String country;
 
     private String createdBy;
@@ -46,9 +50,8 @@ public class StoreRequestDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "ro-RO", timezone = "Europe/Bucharest")
     private LocalDateTime updatedAt;
 
-
-    @Valid
     @NotEmpty
+    @Valid
     private List<ProductStoreRequestDTO> storeProductList;
 
 
