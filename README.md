@@ -5,7 +5,7 @@ Installation steps:
 1. Clone repository https://github.com/sebybuga/hubproductsmanagement.git
 2. Install MySQL 8.3.0
 3. Create DB user defined in src\main\resources\application.properties
-4. Create new database hubproductsmanagement and assign full privileges on it to created user
+4. Create new database hubproductsmanagement with collation utf32_bin and assign full privileges to the created user
 5. Import src\main\resources\postman\Hub_Products_Management.postman_collection.json 
 
 
