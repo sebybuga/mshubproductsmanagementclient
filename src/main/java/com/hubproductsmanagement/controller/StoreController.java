@@ -3,7 +3,7 @@ package com.hubproductsmanagement.controller;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 import com.hubproductsmanagement.dto.StoreDTO;
-import com.hubproductsmanagement.dto.StoreDeleteResponseDTO;
+import com.hubproductsmanagement.dto.DeleteResponseREC;
 import com.hubproductsmanagement.dto.StoreRequestDTO;
 import com.hubproductsmanagement.repo.StoreRepository;
 import com.hubproductsmanagement.service.StoreService;
@@ -53,7 +53,7 @@ public class StoreController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
-    public StoreDeleteResponseDTO deleteStore(@PathVariable Long id, @RequestHeader HttpHeaders headers) {
+    public DeleteResponseREC deleteStore(@PathVariable Long id, @RequestHeader HttpHeaders headers) {
         log.info("Request to delete store with id: {} ", id);
         return storeService.deleteStore(id);
     }
