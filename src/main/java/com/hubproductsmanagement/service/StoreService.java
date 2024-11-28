@@ -69,7 +69,8 @@ public class StoreService {
             return savedStoreDTO;
 
         } catch (Exception e) {
-            throw new ProblemProcessingDataException("An error has occurred while saving store data!",e);
+            log.error("Error saving store data in DB: {}",storeRequestDTO);
+            throw new ProblemProcessingDataException("An error has occurred while saving store data: "+e+"!", e);
         }
 
 
@@ -90,8 +91,10 @@ public class StoreService {
             return storeDTO;
 
         }catch (MappingException e){
+            log.error("Could not map store data from DB: {}",id);
             throw new MappingException(e);
         }catch (RuntimeException se) {
+            log.error("Error reading store data from DB: {}",id);
             throw new ProblemProcessingDataException("Error while getting store data from DB!",se);
         }
 

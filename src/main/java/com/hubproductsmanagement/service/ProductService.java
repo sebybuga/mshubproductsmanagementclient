@@ -5,6 +5,7 @@ import com.github.dozermapper.core.Mapper;
 import com.github.dozermapper.core.MappingException;
 import com.hubproductsmanagement.dto.DeleteResponseREC;
 import com.hubproductsmanagement.dto.ProductDTO;
+import com.hubproductsmanagement.dto.ProductRequestDTO;
 import com.hubproductsmanagement.entity.ProductEntity;
 import com.hubproductsmanagement.exception.ProblemProcessingDataException;
 import com.hubproductsmanagement.repo.ProductRepository;
@@ -29,12 +30,12 @@ public class ProductService {
 
     }
 
-    public ProductDTO createProduct(ProductDTO productDTO) {
+    public ProductDTO createProduct(ProductRequestDTO productDTO) {
         return saveProductInDatabase(productDTO, false);
     }
 
     @Transactional
-    private ProductDTO saveProductInDatabase(ProductDTO productDTO, boolean isUpdate) {
+    private ProductDTO saveProductInDatabase(ProductRequestDTO productDTO, boolean isUpdate) {
         log.info("productEntity to be saved is :{}", productDTO);
 
         ProductEntity productEntity = null;
@@ -47,9 +48,8 @@ public class ProductService {
             if (productId != null) {
                 Optional<ProductEntity> productEntityOptional = productRepository.findById(productId);
                 if (productEntityOptional.isEmpty()) {
-                    throw new ProblemProcessingDataException("Product id not found!", null);
+                    throw new ProblemProcessingDataException("Product not found!", null);
                 }
-
             }
 
             productEntity = mapper.map(productDTO, ProductEntity.class);
@@ -63,7 +63,8 @@ public class ProductService {
             return savedProductDTO;
 
         } catch (Exception e) {
-            throw new ProblemProcessingDataException("An error has occurred while saving product data!", e);
+            log.error("Error saving product data in DB: {}",productDTO);
+            throw new ProblemProcessingDataException("An error has occurred while saving product data: "+e+"!", e);
         }
 
     }
@@ -80,6 +81,7 @@ public class ProductService {
             }
         } catch (
                 MappingException e) {
+            log.error("Could not map product data from DB: {}",id);
             throw new MappingException(e);
         } catch (RuntimeException re) {
             throw new ProblemProcessingDataException("Error while getting data from DB!",re);
@@ -91,7 +93,7 @@ public class ProductService {
     }
 
 
-    public ProductDTO updateProduct(ProductDTO productDto) {
+    public ProductDTO updateProduct(ProductRequestDTO productDto) {
         return saveProductInDatabase(productDto, true);
     }
 

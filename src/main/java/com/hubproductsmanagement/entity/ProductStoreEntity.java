@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Table(name = "product_stores")
@@ -35,20 +36,31 @@ public class ProductStoreEntity {
     @Enumerated(EnumType.ORDINAL)
     private CurrencyEnum currency;
 
+    @Column(name = "createdBy", updatable = false)
+    private String createdBy;
+
+    @Column(name = "createdAt", updatable = false)
+    private LocalDateTime createdAt;
+
+    private String updatedBy;
+
+    private LocalDateTime updatedAt;
 
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ProductStoreEntity)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         ProductStoreEntity that = (ProductStoreEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(store, that.store) && Objects.equals(product, that.product)
-                && Objects.equals(quantity, that.quantity) && Objects.equals(price, that.price) &&  Objects.equals(currency , that.currency);
+                && Objects.equals(quantity, that.quantity) && Objects.equals(price, that.price) && currency == that.currency
+                && Objects.equals(createdBy, that.createdBy) && Objects.equals(createdAt, that.createdAt)
+                && Objects.equals(updatedBy, that.updatedBy) && Objects.equals(updatedAt, that.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, store, product, quantity, price, currency);
+        return Objects.hash(id, store, product, quantity, price, currency, createdBy, createdAt, updatedBy, updatedAt);
     }
 
     @Override
@@ -60,6 +72,10 @@ public class ProductStoreEntity {
                 ", quantity=" + quantity +
                 ", price=" + price +
                 ", currency=" + currency +
+                ", createdBy='" + createdBy + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedBy='" + updatedBy + '\'' +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

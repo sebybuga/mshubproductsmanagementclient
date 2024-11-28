@@ -4,6 +4,7 @@ import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 import com.hubproductsmanagement.dto.ProductDTO;
 import com.hubproductsmanagement.dto.DeleteResponseREC;
+import com.hubproductsmanagement.dto.ProductRequestDTO;
 import com.hubproductsmanagement.repo.ProductRepository;
 import com.hubproductsmanagement.service.ProductService;
 import jakarta.validation.Valid;
@@ -34,7 +35,7 @@ public class ProductController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
-    public ProductDTO createProduct(@RequestBody @Valid ProductDTO productDto, @RequestHeader HttpHeaders headers) {
+    public ProductDTO createProduct(@RequestBody @Valid ProductRequestDTO productDto, @RequestHeader HttpHeaders headers) {
         log.info("Request to create product with params: {} ", productDto);
         return productService.createProduct(productDto);
     }
@@ -42,7 +43,7 @@ public class ProductController {
 
     @PutMapping
     @PreAuthorize("hasAnyRole('ADMINISTRATOR')")
-    public ProductDTO updateProduct(@RequestBody @Valid ProductDTO productDto, @RequestHeader HttpHeaders headers) {
+    public ProductDTO updateProduct(@RequestBody @Valid ProductRequestDTO productDto, @RequestHeader HttpHeaders headers) {
         log.info("Request to update product with params: {} ", productDto);
         return productService.updateProduct(productDto);
     }

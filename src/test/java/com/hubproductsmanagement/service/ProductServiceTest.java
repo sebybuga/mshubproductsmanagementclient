@@ -3,6 +3,7 @@ package com.hubproductsmanagement.service;
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 import com.hubproductsmanagement.dto.ProductDTO;
+import com.hubproductsmanagement.dto.ProductRequestDTO;
 import com.hubproductsmanagement.entity.ProductEntity;
 import com.hubproductsmanagement.repo.ProductRepository;
 import org.junit.Test;
@@ -35,7 +36,7 @@ public class ProductServiceTest {
     @Test
     public void testCreateProduct() {
 
-        ProductDTO productDTO = generateProductDto();
+        ProductRequestDTO productDTO = generateProductDto();
         ProductEntity productEntity = mapper.map(productDTO, ProductEntity.class);
 
         when(productRepositoryMock.save(any())).thenReturn(productEntity);
@@ -48,9 +49,9 @@ public class ProductServiceTest {
 
     }
 
-    ProductDTO generateProductDto() {
+    ProductRequestDTO generateProductDto() {
 
-        ProductDTO productDTO = new ProductDTO();
+        ProductRequestDTO productDTO = new ProductRequestDTO();
         productDTO.setId(1L);
         productDTO.setProductName("some name");
         productDTO.setDescription("some desc");

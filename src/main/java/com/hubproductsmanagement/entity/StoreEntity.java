@@ -54,30 +54,33 @@ public class StoreEntity {
     )
     private List<ProductStoreEntity> storeProductList;
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof StoreEntity)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         StoreEntity that = (StoreEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(createdBy, that.createdBy)
-                && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedBy, that.updatedBy) && Objects.equals(updatedAt, that.updatedAt)
-                && Objects.equals(storeProductList, that.storeProductList);
+        return Objects.equals(id, that.id) && Objects.equals(storeName, that.storeName) && Objects.equals(zipCode, that.zipCode) && Objects.equals(address, that.address) && Objects.equals(city, that.city) && Objects.equals(country, that.country) && Objects.equals(createdBy, that.createdBy) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedBy, that.updatedBy) && Objects.equals(updatedAt, that.updatedAt) && Objects.equals(storeProductList, that.storeProductList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createdBy, createdAt, updatedBy, updatedAt, storeProductList);
+        return Objects.hash(id, storeName, zipCode, address, city, country, createdBy, createdAt, updatedBy, updatedAt, storeProductList);
     }
 
     @Override
     public String toString() {
         return "StoreEntity{" +
                 "id=" + id +
+                ", storeName='" + storeName + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
                 ", createdBy='" + createdBy + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedBy='" + updatedBy + '\'' +
                 ", updatedAt=" + updatedAt +
+                ", storeProductList=" + storeProductList +
                 '}';
     }
 }
